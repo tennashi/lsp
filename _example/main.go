@@ -16,9 +16,7 @@ func (Handler) OnInitialize(ctx context.Context, c *lsp.Conn, p lsp.InitializePa
 			Version: "v0.0.1",
 			Name:    "sample-ls",
 		},
-		Capabilities: lsp.ServerCapabilities{
-			TextDocumentSync: lsp.TextDocumentSyncKindFull,
-		},
+		Capabilities: lsp.ServerCapabilities{},
 	}, nil
 }
 
