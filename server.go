@@ -210,19 +210,6 @@ func (s *Server) cancelLoop(ctx context.Context) {
 	}
 }
 
-type WorkDoneProgressParams struct {
-	WorkDoneToken ProgressToken
-}
-
-type PartialResultParams struct {
-	PartialResultToken ProgressToken
-}
-
-type TextDocumentPositionParams struct {
-	TextDocument TextDocumentIdentifier
-	Position     Position
-}
-
 func (s *Server) handle(ctx context.Context, conn *jsonrpc2.Conn, req *jsonrpc2.Request) (interface{}, error) {
 	c := wrap(conn)
 
@@ -265,10 +252,6 @@ func (s *Server) handleNotification(ctx context.Context, c *Conn, req *jsonrpc2.
 	}
 }
 
-type CancelParams struct {
-	ID jsonrpc2.ID
-}
-
 func (s *Server) cancelRequest(ctx context.Context, c *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		// the notification should ignore the state error
@@ -287,11 +270,6 @@ func (s *Server) cancelRequest(ctx context.Context, c *Conn, req *jsonrpc2.Reque
 	s.cancelCh <- p.ID
 
 	return nil, nil
-}
-
-type ProgressParams struct {
-	Token ProgressToken
-	Value interface{}
 }
 
 func (s *Server) progress(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -349,10 +327,6 @@ func (s *Server) exit(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (i
 	return nil, nil
 }
 
-type DidChangeWorkspaceFoldersParams struct {
-	Event WorkspaceFoldersChangeEvent
-}
-
 func (s *Server) didChangeWorkspaceFolders(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		// the notification should ignore the state error
@@ -377,10 +351,6 @@ func (s *Server) didChangeWorkspaceFolders(ctx context.Context, conn *Conn, req 
 	}
 
 	return nil, nil
-}
-
-type DidChangeConfigurationParams struct {
-	Settings interface{}
 }
 
 func (s *Server) didChangeConfiguration(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -409,10 +379,6 @@ func (s *Server) didChangeConfiguration(ctx context.Context, conn *Conn, req *js
 	return nil, nil
 }
 
-type DidChangeWatchedFilesParams struct {
-	Changes []FileEvent
-}
-
 func (s *Server) didChangeWatchedFiles(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		// the notification should ignore the state error
@@ -437,10 +403,6 @@ func (s *Server) didChangeWatchedFiles(ctx context.Context, conn *Conn, req *jso
 	}
 
 	return nil, nil
-}
-
-type DidOpenTextDocumentParams struct {
-	TextDocument TextDocumentItem
 }
 
 func (s *Server) didOpenTextDocument(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -469,11 +431,6 @@ func (s *Server) didOpenTextDocument(ctx context.Context, conn *Conn, req *jsonr
 	return nil, nil
 }
 
-type DidChangeTextDocumentParams struct {
-	TextDocument   VersionedTextDocumentIdentifier
-	ContentChanges []TextDocumentContentChangeEvent
-}
-
 func (s *Server) didChangeTextDocument(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		// the notification should ignore the state error
@@ -498,11 +455,6 @@ func (s *Server) didChangeTextDocument(ctx context.Context, conn *Conn, req *jso
 	}
 
 	return nil, nil
-}
-
-type WillSaveTextDocumentParams struct {
-	TextDocument TextDocumentIdentifier
-	Reason       TextDocumentSaveReason
 }
 
 func (s *Server) willSaveTextDocument(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -531,11 +483,6 @@ func (s *Server) willSaveTextDocument(ctx context.Context, conn *Conn, req *json
 	return nil, nil
 }
 
-type DidSaveTextDocumentParams struct {
-	TextDocument TextDocumentIdentifier
-	Text         string
-}
-
 func (s *Server) didSaveTextDocument(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		// the notification should ignore the state error
@@ -560,10 +507,6 @@ func (s *Server) didSaveTextDocument(ctx context.Context, conn *Conn, req *jsonr
 	}
 
 	return nil, nil
-}
-
-type DidCloseTextDocumentParams struct {
-	TextDocument TextDocumentIdentifier
 }
 
 func (s *Server) didCloseTextDocument(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -664,17 +607,6 @@ func (s *Server) handleRequest(ctx context.Context, c *Conn, req *jsonrpc2.Reque
 	}
 }
 
-type InitializeParams struct {
-	ProcessID             int
-	ClientInfo            ClientInfo
-	RootPath              string
-	RootURI               string
-	InitializationOptions interface{}
-	Capabilities          ClientCapabilities
-	Trace                 TraceConfig
-	WorkspaceFolders      []WorkspaceFolder
-}
-
 func (s *Server) initialize(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	st := s.getState()
 	if st == serverStateShutdowned {
@@ -742,12 +674,6 @@ func (*Server) defaultOnShutdown(context.Context, *Conn) error {
 	return nil
 }
 
-type WorkspaceSymbolParams struct {
-	WorkDoneProgressParams
-	PartialResultParams
-	Query string
-}
-
 func (s *Server) workspaceSymbol(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -772,12 +698,6 @@ func (s *Server) workspaceSymbol(ctx context.Context, conn *Conn, req *jsonrpc2.
 	}
 
 	return res, nil
-}
-
-type ExecuteCommandParams struct {
-	WorkDoneProgressParams
-	Command   string
-	Arguments []interface{}
 }
 
 func (s *Server) executeCommand(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -832,13 +752,6 @@ func (s *Server) willSaveWaitUntilTextDocument(ctx context.Context, conn *Conn, 
 	return res, nil
 }
 
-type CompletionParams struct {
-	TextDocumentPositionParams
-	WorkDoneProgressParams
-	PartialResultParams
-	Context CompletionContext
-}
-
 func (s *Server) completion(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -891,11 +804,6 @@ func (s *Server) completionItemResolve(ctx context.Context, conn *Conn, req *jso
 	return res, nil
 }
 
-type HoverParams struct {
-	TextDocumentPositionParams
-	WorkDoneProgressParams
-}
-
 func (s *Server) hover(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -920,10 +828,6 @@ func (s *Server) hover(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (
 	}
 
 	return res, nil
-}
-
-type SignatureHelpParams struct {
-	Context SignatureHelpContext
 }
 
 func (s *Server) signatureHelp(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -952,12 +856,6 @@ func (s *Server) signatureHelp(ctx context.Context, conn *Conn, req *jsonrpc2.Re
 	return res, nil
 }
 
-type DeclarationParams struct {
-	TextDocumentPositionParams
-	WorkDoneProgressParams
-	PartialResultParams
-}
-
 func (s *Server) declaration(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -982,12 +880,6 @@ func (s *Server) declaration(ctx context.Context, conn *Conn, req *jsonrpc2.Requ
 	}
 
 	return res, nil
-}
-
-type DefinitionParams struct {
-	TextDocumentPositionParams
-	WorkDoneProgressParams
-	PartialResultParams
 }
 
 func (s *Server) definition(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -1016,12 +908,6 @@ func (s *Server) definition(ctx context.Context, conn *Conn, req *jsonrpc2.Reque
 	return res, nil
 }
 
-type TypeDefinitionParams struct {
-	TextDocumentPositionParams
-	WorkDoneProgressParams
-	PartialResultParams
-}
-
 func (s *Server) typeDefinition(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -1046,12 +932,6 @@ func (s *Server) typeDefinition(ctx context.Context, conn *Conn, req *jsonrpc2.R
 	}
 
 	return res, nil
-}
-
-type ImplementationParams struct {
-	TextDocumentPositionParams
-	WorkDoneProgressParams
-	PartialResultParams
 }
 
 func (s *Server) implementation(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -1080,13 +960,6 @@ func (s *Server) implementation(ctx context.Context, conn *Conn, req *jsonrpc2.R
 	return res, nil
 }
 
-type ReferenceParams struct {
-	TextDocumentPositionParams
-	WorkDoneProgressParams
-	PartialResultParams
-	Context ReferenceContext
-}
-
 func (s *Server) references(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -1111,12 +984,6 @@ func (s *Server) references(ctx context.Context, conn *Conn, req *jsonrpc2.Reque
 	}
 
 	return res, nil
-}
-
-type DocumentHighlightParams struct {
-	TextDocumentPositionParams
-	WorkDoneProgressParams
-	PartialResultParams
 }
 
 func (s *Server) documentHighlight(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -1145,10 +1012,6 @@ func (s *Server) documentHighlight(ctx context.Context, conn *Conn, req *jsonrpc
 	return res, nil
 }
 
-type DocumentSymbolParams struct {
-	TextDocument TextDocumentIdentifier
-}
-
 func (s *Server) documentSymbol(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -1175,14 +1038,6 @@ func (s *Server) documentSymbol(ctx context.Context, conn *Conn, req *jsonrpc2.R
 	return res, nil
 }
 
-type CodeActionParams struct {
-	WorkDoneProgressParams
-	PartialResultParams
-	TextDocument TextDocumentIdentifier
-	Range        Range
-	Context      CodeActionContext
-}
-
 func (s *Server) codeAction(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -1207,12 +1062,6 @@ func (s *Server) codeAction(ctx context.Context, conn *Conn, req *jsonrpc2.Reque
 	}
 
 	return res, nil
-}
-
-type CodeLensParams struct {
-	WorkDoneProgressParams
-	PartialResultParams
-	TextDocument TextDocumentIdentifier
 }
 
 func (s *Server) codeLens(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -1267,12 +1116,6 @@ func (s *Server) codeLensResolve(ctx context.Context, conn *Conn, req *jsonrpc2.
 	return res, nil
 }
 
-type DocumentLinkParams struct {
-	WorkDoneProgressParams
-	PartialResultParams
-	TextDocument TextDocumentIdentifier
-}
-
 func (s *Server) documentLink(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -1325,12 +1168,6 @@ func (s *Server) documentLinkResolve(ctx context.Context, conn *Conn, req *jsonr
 	return res, nil
 }
 
-type DocumentColorParams struct {
-	WorkDoneProgressParams
-	PartialResultParams
-	TextDocument TextDocumentIdentifier
-}
-
 func (s *Server) documentColor(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -1355,14 +1192,6 @@ func (s *Server) documentColor(ctx context.Context, conn *Conn, req *jsonrpc2.Re
 	}
 
 	return res, nil
-}
-
-type ColorPresentationParams struct {
-	WorkDoneProgressParams
-	PartialResultParams
-	TextDocument TextDocumentIdentifier
-	Color        Color
-	Range        Range
 }
 
 func (s *Server) colorPresentation(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -1391,12 +1220,6 @@ func (s *Server) colorPresentation(ctx context.Context, conn *Conn, req *jsonrpc
 	return res, nil
 }
 
-type DocumentFormattingParams struct {
-	WorkDoneProgressParams
-	TextDocument TextDocumentIdentifier
-	Options      FormattingOptions
-}
-
 func (s *Server) documentFormatting(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -1421,13 +1244,6 @@ func (s *Server) documentFormatting(ctx context.Context, conn *Conn, req *jsonrp
 	}
 
 	return res, nil
-}
-
-type DocumentRangeFormattingParams struct {
-	WorkDoneProgressParams
-	TextDocument TextDocumentIdentifier
-	Range        Range
-	Options      FormattingOptions
 }
 
 func (s *Server) documentRangeFormatting(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -1456,13 +1272,6 @@ func (s *Server) documentRangeFormatting(ctx context.Context, conn *Conn, req *j
 	return res, nil
 }
 
-type DocumentOnTypeFormattingParams struct {
-	TextDocument TextDocumentIdentifier
-	Position     Position
-	Ch           string
-	Options      FormattingOptions
-}
-
 func (s *Server) documentOnTypeFormatting(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -1487,13 +1296,6 @@ func (s *Server) documentOnTypeFormatting(ctx context.Context, conn *Conn, req *
 	}
 
 	return res, nil
-}
-
-type RenameParams struct {
-	WorkDoneProgressParams
-	TextDocument TextDocumentIdentifier
-	Position     Position
-	NewName      string
 }
 
 func (s *Server) rename(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
@@ -1548,11 +1350,6 @@ func (s *Server) prepareRename(ctx context.Context, conn *Conn, req *jsonrpc2.Re
 	return res, nil
 }
 
-type FoldingRangeParams struct {
-	WorkDoneProgressParams
-	TextDocument TextDocumentIdentifier
-}
-
 func (s *Server) foldingRange(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {
 	if err := s.checkState(); err != nil {
 		return err, nil
@@ -1577,13 +1374,6 @@ func (s *Server) foldingRange(ctx context.Context, conn *Conn, req *jsonrpc2.Req
 	}
 
 	return res, nil
-}
-
-type SelectionRangeParams struct {
-	WorkDoneProgressParams
-	PartialResultParams
-	TextDocument TextDocumentIdentifier
-	Positions    []Position
 }
 
 func (s *Server) selectionRange(ctx context.Context, conn *Conn, req *jsonrpc2.Request) (interface{}, error) {

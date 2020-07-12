@@ -5,35 +5,35 @@ package lsp
 type DocumentURI string
 
 type Position struct {
-	Line      int
-	Character int
+	Line      int `json:"line,omitempty"`
+	Character int `json:"character,omitempty"`
 }
 
 type Range struct {
-	Start Position
-	End   Position
+	Start Position `json:"start,omitempty"`
+	End   Position `json:"end,omitempty"`
 }
 
 type Location struct {
-	URI   DocumentURI
-	Range Range
+	URI   DocumentURI `json:"uri,omitempty"`
+	Range Range       `json:"range,omitempty"`
 }
 
 type LocationLink struct {
-	OriginSelectionRange Range
-	TargetURI            DocumentURI
-	TargetRange          Range
-	TargetSelectionRange Range
+	OriginSelectionRange Range       `json:"originSelectionRange,omitempty"`
+	TargetURI            DocumentURI `json:"targetURI,omitempty"`
+	TargetRange          Range       `json:"targetRange,omitempty"`
+	TargetSelectionRange Range       `json:"targetSelectionRange,omitempty"`
 }
 
 type Diagnostic struct {
-	Range              Range
-	Severity           DiagnosticSeverity
-	Code               interface{} // int | string
-	Source             string
-	Message            string
-	Tags               []DiagnosticTag
-	RelatedInformation []DiagnosticRelatedInformation
+	Range              Range                          `json:"range,omitempty"`
+	Severity           DiagnosticSeverity             `json:"severity,omitempty"`
+	Code               interface{}                    `json:"code,omitempty"` // int | string
+	Source             string                         `json:"source,omitempty"`
+	Message            string                         `json:"message,omitempty"`
+	Tags               []DiagnosticTag                `json:"tags,omitempty"`
+	RelatedInformation []DiagnosticRelatedInformation `json:"relatedInformation,omitempty"`
 }
 
 type DiagnosticSeverity int
@@ -55,65 +55,65 @@ const (
 )
 
 type DiagnosticRelatedInformation struct {
-	Location Location
-	Message  string
+	Location Location `json:"location,omitempty"`
+	Message  string   `json:"message,omitempty"`
 }
 
 type Command struct {
-	Title     string
-	Command   string
-	Arguments []interface{}
+	Title     string        `json:"title,omitempty"`
+	Command   string        `json:"command,omitempty"`
+	Arguments []interface{} `json:"arguments,omitempty"`
 }
 
 type TextEdit struct {
-	Range   Range
-	NewText string
+	Range   Range  `json:"range,omitempty"`
+	NewText string `json:"newText,omitempty"`
 }
 
 type TextDocumentEdit struct {
-	TextDocument VersionedTextDocumentIdentifier
-	Edits        []TextEdit
+	TextDocument VersionedTextDocumentIdentifier `json:"textDocument,omitempty"`
+	Edits        []TextEdit                      `json:"edits,omitempty"`
 }
 
 // ### File Resource changes
 
 type CreateFileOptions struct {
-	Overwrite      bool
-	IgnoreIfExists bool
+	Overwrite      bool `json:"overwrite,omitempty"`
+	IgnoreIfExists bool `json:"ignoreIfExists,omitempty"`
 }
 
 type CreateFile struct {
-	Kind    string
-	URI     DocumentURI
-	Options CreateFileOptions
+	Kind    string            `json:"kind,omitempty"`
+	URI     DocumentURI       `json:"uri,omitempty"`
+	Options CreateFileOptions `json:"options,omitempty"`
 }
 
 type RenameFileOptions struct {
-	Overwrite      bool
-	IgnoreIfExists bool
+	Overwrite      bool `json:"overwrite,omitempty"`
+	IgnoreIfExists bool `json:"ignoreIfExists,omitempty"`
 }
 
 type RenameFile struct {
-	Kind    string
-	OldURI  DocumentURI
-	NewURI  DocumentURI
-	Options RenameFileOptions
+	Kind    string            `json:"kind,omitempty"`
+	OldURI  DocumentURI       `json:"oldURI,omitempty"`
+	NewURI  DocumentURI       `json:"newURI,omitempty"`
+	Options RenameFileOptions `json:"options,omitempty"`
 }
 
 type DeleteFileOptions struct {
-	Recursive         bool
-	IgnoreIfNotExists bool
+	Recursive         bool `json:"recursive,omitempty"`
+	IgnoreIfNotExists bool `json:"ignoreIfNotExists,omitempty"`
 }
 
 type DeleteFile struct {
-	Kind    string
-	URI     DocumentURI
-	Options DeleteFileOptions
+	Kind    string            `json:"kind,omitempty"`
+	URI     DocumentURI       `json:"uri,omitempty"`
+	Options DeleteFileOptions `json:"options,omitempty"`
 }
 
 type WorkspaceEdit struct {
-	Changes         map[DocumentURI][]TextEdit
-	DocumentChanges []interface{}
+	Changes         map[DocumentURI][]TextEdit `json:"changes,omitempty"`
+	DocumentChanges []interface{}              `json:"documentChanges,omitempty"`
 }
 
 type ResourceOperationKind int
@@ -134,32 +134,32 @@ const (
 )
 
 type TextDocumentIdentifier struct {
-	URI DocumentURI
+	URI DocumentURI `json:"uri,omitempty"`
 }
 
 type TextDocumentItem struct {
-	URI        DocumentURI
-	LanguageID string
-	Version    int
-	Text       string
+	URI        DocumentURI `json:"uri,omitempty"`
+	LanguageID string      `json:"languageID,omitempty"`
+	Version    int         `json:"version,omitempty"`
+	Text       string      `json:"text,omitempty"`
 }
 
 type VersionedTextDocumentIdentifier struct {
-	TextDocumentIdentifier
-	Version *int
+	TextDocumentIdentifier `json:"textDocumentIdentifier,omitempty"`
+	Version                *int `json:"version,omitempty"`
 }
 
 type DocumentFilter struct {
-	Language string
-	Scheme   string
-	Pattern  string
+	Language string `json:"language,omitempty"`
+	Scheme   string `json:"scheme,omitempty"`
+	Pattern  string `json:"pattern,omitempty"`
 }
 
 type DocumentSelector []DocumentFilter
 
 type MarkupContent struct {
-	Kind  MarkupKind
-	Value string
+	Kind  MarkupKind `json:"kind,omitempty"`
+	Value string     `json:"value,omitempty"`
 }
 
 type MarkupKind int
@@ -172,30 +172,30 @@ const (
 // ### Work Done Progress
 
 type WorkDoneProgressBegin struct {
-	Kind        string
-	Title       string
-	Cancellable bool
-	Message     string
-	Percentage  int
+	Kind        string `json:"kind,omitempty"`
+	Title       string `json:"title,omitempty"`
+	Cancellable bool   `json:"cancellable,omitempty"`
+	Message     string `json:"message,omitempty"`
+	Percentage  int    `json:"percentage,omitempty"`
 }
 
 type WorkDoneProgressReport struct {
-	Kind        string
-	Cancellable bool
-	Message     string
-	Percentage  int
+	Kind        string `json:"kind,omitempty"`
+	Cancellable bool   `json:"cancellable,omitempty"`
+	Message     string `json:"message,omitempty"`
+	Percentage  int    `json:"percentage,omitempty"`
 }
 
 type WorkDoneProgressEnd struct {
-	Kind    string
-	Message string
+	Kind    string `json:"kind,omitempty"`
+	Message string `json:"message,omitempty"`
 }
 
 // ### Actual Protocol
 
 type ClientInfo struct {
-	Name    string
-	Version string
+	Name    string `json:"name,omitempty"`
+	Version string `json:"version,omitempty"`
 }
 
 type SymbolKind int
@@ -281,12 +281,12 @@ const (
 	CodeActionKindSourceOrganizeImports
 )
 
-type TraceConfig int
+type TraceConfig string
 
 const (
-	TraceConfigOff TraceConfig = iota
-	TraceConfigMessages
-	TraceConfigVerbose
+	TraceConfigOff      TraceConfig = "off"
+	TraceConfigMessages TraceConfig = "messages"
+	TraceConfigVerbose  TraceConfig = "verbose"
 )
 
 type TextDocumentSyncKind int
@@ -298,17 +298,17 @@ const (
 )
 
 type MessageActionItem struct {
-	Title string
+	Title string `json:"title,omitempty"`
 }
 
 type WorkspaceFolder struct {
-	URI  DocumentURI
-	Name string
+	URI  DocumentURI `json:"uri,omitempty"`
+	Name string      `json:"name,omitempty"`
 }
 
 type ServerInfo struct {
-	Name    string
-	Version string
+	Name    string `json:"name,omitempty"`
+	Version string `json:"version,omitempty"`
 }
 
 type MessageType int
@@ -324,29 +324,29 @@ const (
 type ProgressToken interface{}
 
 type Registration struct {
-	ID             string
-	Method         string
-	RegisterOption interface{}
+	ID             string      `json:"id,omitempty"`
+	Method         string      `json:"method,omitempty"`
+	RegisterOption interface{} `json:"registerOption,omitempty"`
 }
 
 type Unregistration struct {
-	ID     string
-	Method string
+	ID     string `json:"id,omitempty"`
+	Method string `json:"method,omitempty"`
 }
 
 type WorkspaceFoldersChangeEvent struct {
-	Added   []WorkspaceFolder
-	Removed []WorkspaceFolder
+	Added   []WorkspaceFolder `json:"added,omitempty"`
+	Removed []WorkspaceFolder `json:"removed,omitempty"`
 }
 
 type ConfigurationItem struct {
-	ScopeURI DocumentURI
-	Section  string
+	ScopeURI DocumentURI `json:"scopeURI,omitempty"`
+	Section  string      `json:"section,omitempty"`
 }
 
 type FileSystemWatcher struct {
-	GlobPattern string
-	Kind        WatchKind
+	GlobPattern string    `json:"globPattern,omitempty"`
+	Kind        WatchKind `json:"kind,omitempty"`
 }
 
 type WatchKind int
@@ -358,8 +358,8 @@ const (
 )
 
 type FileEvent struct {
-	URI  DocumentURI
-	Type FileChangeType
+	URI  DocumentURI    `json:"uri,omitempty"`
+	Type FileChangeType `json:"type,omitempty"`
 }
 
 type FileChangeType int
@@ -372,17 +372,17 @@ const (
 )
 
 type SymbolInformation struct {
-	Name          string
-	Kind          SymbolKind
-	Deprecated    bool
-	Location      Location
-	ContainerName string
+	Name          string     `json:"name,omitempty"`
+	Kind          SymbolKind `json:"kind,omitempty"`
+	Deprecated    bool       `json:"deprecated,omitempty"`
+	Location      Location   `json:"location,omitempty"`
+	ContainerName string     `json:"containerName,omitempty"`
 }
 
 type TextDocumentContentChangeEvent struct {
-	Range       Range
-	RangeLength int // deprecated
-	Text        string
+	Range       Range  `json:"range,omitempty"`
+	RangeLength int    `json:"rangeLength,omitempty"` // deprecated
+	Text        string `json:"text,omitempty"`
 }
 
 type TextDocumentSaveReason int
@@ -395,8 +395,8 @@ const (
 )
 
 type CompletionContext struct {
-	TriggerKind      CompletionTriggerKind
-	TriggerCharacter string
+	TriggerKind      CompletionTriggerKind `json:"triggerKind,omitempty"`
+	TriggerCharacter string                `json:"triggerCharacter,omitempty"`
 }
 
 type CompletionTriggerKind int
@@ -409,27 +409,27 @@ const (
 )
 
 type CompletionList struct {
-	IsIncomplete bool
-	Items        []CompletionItem
+	IsIncomplete bool             `json:"isIncomplete,omitempty"`
+	Items        []CompletionItem `json:"items,omitempty"`
 }
 
 type CompletionItem struct {
-	Label               string
-	Kind                CompletionItemKind
-	Tags                []CompletionItemTag
-	Detail              string
-	Documentation       interface{}
-	Deprecated          bool // deprecated
-	Preselect           bool
-	SortText            string
-	FilterText          string
-	InsertText          string
-	InsertTextFormat    InsertTextFormat
-	TextEdit            TextEdit
-	AdditionalTextEdits []TextEdit
-	CommitCharacters    []string
-	Command             Command
-	Data                interface{}
+	Label               string              `json:"label,omitempty"`
+	Kind                CompletionItemKind  `json:"kind,omitempty"`
+	Tags                []CompletionItemTag `json:"tags,omitempty"`
+	Detail              string              `json:"detail,omitempty"`
+	Documentation       interface{}         `json:"documentation,omitempty"`
+	Deprecated          bool                `json:"deprecated,omitempty"` // deprecated
+	Preselect           bool                `json:"preselect,omitempty"`
+	SortText            string              `json:"sortText,omitempty"`
+	FilterText          string              `json:"filterText,omitempty"`
+	InsertText          string              `json:"insertText,omitempty"`
+	InsertTextFormat    InsertTextFormat    `json:"insertTextFormat,omitempty"`
+	TextEdit            TextEdit            `json:"textEdit,omitempty"`
+	AdditionalTextEdits []TextEdit          `json:"additionalTextEdits,omitempty"`
+	CommitCharacters    []string            `json:"commitCharacters,omitempty"`
+	Command             Command             `json:"command,omitempty"`
+	Data                interface{}         `json:"data,omitempty"`
 }
 
 type InsertTextFormat int
@@ -441,15 +441,15 @@ const (
 )
 
 type Hover struct {
-	Contents MarkupContent
-	Range    Range
+	Contents MarkupContent `json:"contents,omitempty"`
+	Range    Range         `json:"range,omitempty"`
 }
 
 type SignatureHelpContext struct {
-	TriggerKind         SignatureHelpTriggerKind
-	TriggerCharacter    string
-	IsRetrigger         bool
-	ActiveSignatureHelp SignatureHelp
+	TriggerKind         SignatureHelpTriggerKind `json:"triggerKind,omitempty"`
+	TriggerCharacter    string                   `json:"triggerCharacter,omitempty"`
+	IsRetrigger         bool                     `json:"isRetrigger,omitempty"`
+	ActiveSignatureHelp SignatureHelp            `json:"activeSignatureHelp,omitempty"`
 }
 
 type SignatureHelpTriggerKind int
@@ -462,30 +462,30 @@ const (
 )
 
 type SignatureHelp struct {
-	Signatures      []SignatureInformation
-	ActiveSignature int
-	ActiveParameter int
+	Signatures      []SignatureInformation `json:"signatures,omitempty"`
+	ActiveSignature int                    `json:"activeSignature,omitempty"`
+	ActiveParameter int                    `json:"activeParameter,omitempty"`
 }
 
 type SignatureInformation struct {
-	Label         string
-	Documentation interface{}
-	Parameters    []ParameterInformation
+	Label         string                 `json:"label,omitempty"`
+	Documentation interface{}            `json:"documentation,omitempty"`
+	Parameters    []ParameterInformation `json:"parameters,omitempty"`
 }
 
 type ParameterInformation struct {
-	Label         interface{}
-	Documentation interface{}
+	Label         interface{} `json:"label,omitempty"`
+	Documentation interface{} `json:"documentation,omitempty"`
 }
 
 type InitializeResult struct {
-	Capabilities ServerCapabilities
-	ServerInfo   ServerInfo
+	Capabilities ServerCapabilities `json:"capabilities,omitempty"`
+	ServerInfo   ServerInfo         `json:"serverInfo,omitempty"`
 }
 
 type DocumentHighlight struct {
-	Range Range
-	Kind  DocumentHighlightKind
+	Range Range                 `json:"range,omitempty"`
+	Kind  DocumentHighlightKind `json:"kind,omitempty"`
 }
 
 type DocumentHighlightKind int
@@ -498,42 +498,42 @@ const (
 )
 
 type CodeLens struct {
-	Range   Range
-	Command Command
-	Data    interface{}
+	Range   Range       `json:"range,omitempty"`
+	Command Command     `json:"command,omitempty"`
+	Data    interface{} `json:"data,omitempty"`
 }
 
 type DocumentLink struct {
-	Range   Range
-	Target  DocumentURI
-	Tooltip string
-	Data    interface{}
+	Range   Range       `json:"range,omitempty"`
+	Target  DocumentURI `json:"target,omitempty"`
+	Tooltip string      `json:"tooltip,omitempty"`
+	Data    interface{} `json:"data,omitempty"`
 }
 
 type ColorInformation struct {
-	Range Range
-	Color Color
+	Range Range `json:"range,omitempty"`
+	Color Color `json:"color,omitempty"`
 }
 
 type Color struct {
-	Red   float64
-	Green float64
-	Blue  float64
-	Alpha float64
+	Red   float64 `json:"red,omitempty"`
+	Green float64 `json:"green,omitempty"`
+	Blue  float64 `json:"blue,omitempty"`
+	Alpha float64 `json:"alpha,omitempty"`
 }
 
 type ColorPresentation struct {
-	Label               string
-	TextEdit            TextEdit
-	AdditionalTextEdits []TextEdit
+	Label               string     `json:"label,omitempty"`
+	TextEdit            TextEdit   `json:"textEdit,omitempty"`
+	AdditionalTextEdits []TextEdit `json:"additionalTextEdits,omitempty"`
 }
 
 type FoldingRange struct {
-	StartLine      int
-	StartCharacter int
-	EndLine        int
-	EndCharacter   int
-	Kind           FoldingRangeKind
+	StartLine      int              `json:"startLine,omitempty"`
+	StartCharacter int              `json:"startCharacter,omitempty"`
+	EndLine        int              `json:"endLine,omitempty"`
+	EndCharacter   int              `json:"endCharacter,omitempty"`
+	Kind           FoldingRangeKind `json:"kind,omitempty"`
 }
 
 type FoldingRangeKind int
@@ -546,17 +546,17 @@ const (
 )
 
 type SelectionRange struct {
-	Range  Range
-	Parent *SelectionRange
+	Range  Range           `json:"range,omitempty"`
+	Parent *SelectionRange `json:"parent,omitempty"`
 }
 
 type ReferenceContext struct {
-	IncludeDeclaration bool
+	IncludeDeclaration bool `json:"includeDeclaration,omitempty"`
 }
 
 type CodeActionContext struct {
-	Diagnostics []Diagnostic
-	Only        []CodeActionKind
+	Diagnostics []Diagnostic     `json:"diagnostics,omitempty"`
+	Only        []CodeActionKind `json:"only,omitempty"`
 }
 
 type FormattingOptions map[string]interface{}
