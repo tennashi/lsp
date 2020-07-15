@@ -1,9 +1,9 @@
 package lsp
 
 type ClientCapabilities struct {
-	Workspace    WorkspaceClientCapabilities    `json:"workspace,omitempty"`
-	TextDocument TextDocumentClientCapabilities `json:"textDocument,omitempty"`
-	Window       struct {
+	Workspace    *WorkspaceClientCapabilities    `json:"workspace,omitempty"`
+	TextDocument *TextDocumentClientCapabilities `json:"textDocument,omitempty"`
+	Window       *struct {
 		WorkDoneProgress bool `json:"workDoneProgress,omitempty"`
 	} `json:"window,omitempty"`
 	Experimental interface{} `json:"experimental,omitempty"`

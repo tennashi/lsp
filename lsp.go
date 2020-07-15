@@ -1,17 +1,19 @@
 package lsp
 
+import "encoding/json"
+
 // ### Basic JSON Structures
 
 type DocumentURI string
 
 type Position struct {
-	Line      int `json:"line,omitempty"`
-	Character int `json:"character,omitempty"`
+	Line      int `json:"line"`
+	Character int `json:"character"`
 }
 
 type Range struct {
-	Start Position `json:"start,omitempty"`
-	End   Position `json:"end,omitempty"`
+	Start Position `json:"start"`
+	End   Position `json:"end"`
 }
 
 type Location struct {
@@ -134,19 +136,19 @@ const (
 )
 
 type TextDocumentIdentifier struct {
-	URI DocumentURI `json:"uri,omitempty"`
+	URI DocumentURI `json:"uri"`
 }
 
 type TextDocumentItem struct {
-	URI        DocumentURI `json:"uri,omitempty"`
-	LanguageID string      `json:"languageID,omitempty"`
-	Version    int         `json:"version,omitempty"`
-	Text       string      `json:"text,omitempty"`
+	URI        DocumentURI `json:"uri"`
+	LanguageID string      `json:"languageId"`
+	Version    int         `json:"version"`
+	Text       string      `json:"text"`
 }
 
 type VersionedTextDocumentIdentifier struct {
-	TextDocumentIdentifier `json:"textDocumentIdentifier,omitempty"`
-	Version                *int `json:"version,omitempty"`
+	TextDocumentIdentifier `json:",inline"`
+	Version                *int `json:"version"`
 }
 
 type DocumentFilter struct {
@@ -194,8 +196,8 @@ type WorkDoneProgressEnd struct {
 // ### Actual Protocol
 
 type ClientInfo struct {
-	Name    string `json:"name,omitempty"`
-	Version string `json:"version,omitempty"`
+	Name    string `json:"name"`
+	Version string `json:"version"`
 }
 
 type SymbolKind int
@@ -268,17 +270,17 @@ const (
 	CompletionItemKindTypeParameter
 )
 
-type CodeActionKind int
+type CodeActionKind string
 
 const (
-	CodeActionKindEmpty CodeActionKind = iota
-	CodeActionKindQuickFix
-	CodeActionKindRefactor
-	CodeActionKindRefactorExtract
-	CodeActionKindRefactorInline
-	CodeActionKindRefactorRewirte
-	CodeActionKindSource
-	CodeActionKindSourceOrganizeImports
+	CodeActionKindEmpty                 CodeActionKind = ""
+	CodeActionKindQuickFix              CodeActionKind = "quickfix"
+	CodeActionKindRefactor              CodeActionKind = "refactor"
+	CodeActionKindRefactorExtract       CodeActionKind = "refactor.extract"
+	CodeActionKindRefactorInline        CodeActionKind = "refactor.inline"
+	CodeActionKindRefactorRewirte       CodeActionKind = "refactor.rewrite"
+	CodeActionKindSource                CodeActionKind = "source"
+	CodeActionKindSourceOrganizeImports CodeActionKind = "source.organizeImports"
 )
 
 type TraceConfig string
@@ -302,8 +304,8 @@ type MessageActionItem struct {
 }
 
 type WorkspaceFolder struct {
-	URI  DocumentURI `json:"uri,omitempty"`
-	Name string      `json:"name,omitempty"`
+	URI  DocumentURI `json:"uri"`
+	Name string      `json:"name"`
 }
 
 type ServerInfo struct {
@@ -321,7 +323,34 @@ const (
 	MessageTypeLog
 )
 
-type ProgressToken interface{}
+type ProgressToken struct {
+	str string
+	num int
+}
+
+func NewIntProgressToken(v int) ProgressToken {
+	return ProgressToken{num: v}
+}
+
+func NewStringProgressToken(v string) ProgressToken {
+	return ProgressToken{str: v}
+}
+
+func (v *ProgressToken) MarshalJSON() ([]byte, error) {
+	if v.str != "" {
+		return json.Marshal(v.str)
+	}
+
+	return json.Marshal(v.num)
+}
+
+func (v *ProgressToken) UnmarshalJSON(d []byte) error {
+	if err := json.Unmarshal(d, &v.num); err == nil {
+		return nil
+	}
+
+	return json.Unmarshal(d, &v.str)
+}
 
 type Registration struct {
 	ID             string      `json:"id,omitempty"`
@@ -335,12 +364,12 @@ type Unregistration struct {
 }
 
 type WorkspaceFoldersChangeEvent struct {
-	Added   []WorkspaceFolder `json:"added,omitempty"`
-	Removed []WorkspaceFolder `json:"removed,omitempty"`
+	Added   []WorkspaceFolder `json:"added"`
+	Removed []WorkspaceFolder `json:"removed"`
 }
 
 type ConfigurationItem struct {
-	ScopeURI DocumentURI `json:"scopeURI,omitempty"`
+	ScopeURI DocumentURI `json:"scopeUri,omitempty"`
 	Section  string      `json:"section,omitempty"`
 }
 
@@ -358,8 +387,8 @@ const (
 )
 
 type FileEvent struct {
-	URI  DocumentURI    `json:"uri,omitempty"`
-	Type FileChangeType `json:"type,omitempty"`
+	URI  DocumentURI    `json:"uri"`
+	Type FileChangeType `json:"type"`
 }
 
 type FileChangeType int
@@ -380,9 +409,9 @@ type SymbolInformation struct {
 }
 
 type TextDocumentContentChangeEvent struct {
-	Range       Range  `json:"range,omitempty"`
+	Range       *Range `json:"range,omitempty"`
 	RangeLength int    `json:"rangeLength,omitempty"` // deprecated
-	Text        string `json:"text,omitempty"`
+	Text        string `json:"text"`
 }
 
 type TextDocumentSaveReason int
@@ -395,7 +424,7 @@ const (
 )
 
 type CompletionContext struct {
-	TriggerKind      CompletionTriggerKind `json:"triggerKind,omitempty"`
+	TriggerKind      CompletionTriggerKind `json:"triggerKind"`
 	TriggerCharacter string                `json:"triggerCharacter,omitempty"`
 }
 
@@ -446,10 +475,10 @@ type Hover struct {
 }
 
 type SignatureHelpContext struct {
-	TriggerKind         SignatureHelpTriggerKind `json:"triggerKind,omitempty"`
+	TriggerKind         SignatureHelpTriggerKind `json:"triggerKind"`
 	TriggerCharacter    string                   `json:"triggerCharacter,omitempty"`
-	IsRetrigger         bool                     `json:"isRetrigger,omitempty"`
-	ActiveSignatureHelp SignatureHelp            `json:"activeSignatureHelp,omitempty"`
+	IsRetrigger         bool                     `json:"isRetrigger"`
+	ActiveSignatureHelp *SignatureHelp           `json:"activeSignatureHelp,omitempty"`
 }
 
 type SignatureHelpTriggerKind int
@@ -462,7 +491,7 @@ const (
 )
 
 type SignatureHelp struct {
-	Signatures      []SignatureInformation `json:"signatures,omitempty"`
+	Signatures      []SignatureInformation `json:"signatures"`
 	ActiveSignature int                    `json:"activeSignature,omitempty"`
 	ActiveParameter int                    `json:"activeParameter,omitempty"`
 }
@@ -516,10 +545,10 @@ type ColorInformation struct {
 }
 
 type Color struct {
-	Red   float64 `json:"red,omitempty"`
-	Green float64 `json:"green,omitempty"`
-	Blue  float64 `json:"blue,omitempty"`
-	Alpha float64 `json:"alpha,omitempty"`
+	Red   float64 `json:"red"`
+	Green float64 `json:"green"`
+	Blue  float64 `json:"blue"`
+	Alpha float64 `json:"alpha"`
 }
 
 type ColorPresentation struct {
@@ -551,12 +580,19 @@ type SelectionRange struct {
 }
 
 type ReferenceContext struct {
-	IncludeDeclaration bool `json:"includeDeclaration,omitempty"`
+	IncludeDeclaration bool `json:"includeDeclaration"`
 }
 
 type CodeActionContext struct {
-	Diagnostics []Diagnostic     `json:"diagnostics,omitempty"`
+	Diagnostics []Diagnostic     `json:"diagnostics"`
 	Only        []CodeActionKind `json:"only,omitempty"`
 }
 
-type FormattingOptions map[string]interface{}
+type FormattingOptions struct {
+	TabSize                int  `json:"tabSize"`
+	InsertSpaces           bool `json:"insertSpaces"`
+	TrimTrailingWhitespace bool `json:"trimTrailingWhitespace,omitempty"`
+	InsertFinalNewline     bool `json:"insertFinalNewline,omitempty"`
+	TrimFinalNewlines      bool `json:"trimFinalNewlines,omitempty"`
+	// TODO: [key: string]: boolean | number | string;
+}
