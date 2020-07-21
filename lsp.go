@@ -420,21 +420,21 @@ func (v *DocumentChanges) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-type ResourceOperationKind int
+type ResourceOperationKind string
 
 const (
-	ResourceOperationKindCreate ResourceOperationKind = iota
-	ResourceOperationKindRename
-	ResourceOperationKindDelete
+	ResourceOperationKindCreate ResourceOperationKind = "create"
+	ResourceOperationKindRename ResourceOperationKind = "rename"
+	ResourceOperationKindDelete ResourceOperationKind = "delete"
 )
 
-type FailureHandlingKind int
+type FailureHandlingKind string
 
 const (
-	FailureHandlingKindAbort FailureHandlingKind = iota
-	FailureHandlingKindTransactional
-	FailureHandlingKindUndo
-	FailureHandlingKindTextOnlyTransactional
+	FailureHandlingKindAbort                 FailureHandlingKind = "abort"
+	FailureHandlingKindTransactional         FailureHandlingKind = "transactional"
+	FailureHandlingKindTextOnlyTransactional FailureHandlingKind = "textOnlyTransactional"
+	FailureHandlingKindUndo                  FailureHandlingKind = "undo"
 )
 
 type TextDocumentIdentifier struct {

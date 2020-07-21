@@ -1,54 +1,56 @@
 package lsp
 
-type ClientCapabilities struct {
-	Workspace    *WorkspaceClientCapabilities    `json:"workspace,omitempty"`
-	TextDocument *TextDocumentClientCapabilities `json:"textDocument,omitempty"`
-	Window       *struct {
-		WorkDoneProgress bool `json:"workDoneProgress,omitempty"`
-	} `json:"window,omitempty"`
-	Experimental interface{} `json:"experimental,omitempty"`
-}
-
-type WorkspaceClientCapabilities struct {
-	ApplyEdit              bool                                     `json:"applyEdit,omitempty"`
-	WorkspaceEdit          WorkspaceEditClientCapabilities          `json:"workspaceEdit,omitempty"`
-	DidChangeConfiguration DidChangeConfigurationClientCapabilities `json:"didChangeConfiguration,omitempty"`
-	DidChangeWatchedFiles  DidChangeWatchedFilesClientCapabilities  `json:"didChangeWatchedFiles,omitempty"`
-	Symbol                 WorkspaceSymbolClientCapabilities        `json:"symbol,omitempty"`
-	ExecuteCommand         ExecuteCommandClientCapabilities         `json:"executeCommand,omitempty"`
-	WorkspaceFolders       bool                                     `json:"workspaceFolders,omitempty"`
-	Configuration          bool                                     `json:"configuration,omitempty"`
-}
-
-type TextDocumentClientCapabilities struct {
-	Synchronization    TextDocumentSyncClientCapabilities        `json:"synchronization,omitempty"`
-	Completion         CompletionClientCapabilities              `json:"completion,omitempty"`
-	Hover              HoverClientCapabilities                   `json:"hover,omitempty"`
-	SignatureHelp      SignatureHelpClientCapabilities           `json:"signatureHelp,omitempty"`
-	Declaration        DeclarationClientCapabilities             `json:"declaration,omitempty"`
-	Definition         DefinitionClientCapabilities              `json:"definition,omitempty"`
-	TypeDefinition     TypeDefinitionClientCapabilities          `json:"typeDefinition,omitempty"`
-	Implementation     ImplementationClientCapabilities          `json:"implementation,omitempty"`
-	References         ReferenceClientCapabilities               `json:"references,omitempty"`
-	DocumentHighlight  DocumentHighlightClientCapabilities       `json:"documentHighlight,omitempty"`
-	DocumentSymbol     DocumentSymbolClientCapabilities          `json:"documentSymbol,omitempty"`
-	CodeAction         CodeActionClientCapabilities              `json:"codeAction,omitempty"`
-	CodeLens           CodeLensClientCapabilities                `json:"codeLens,omitempty"`
-	DocumentLink       DocumentLinkClientCapabilities            `json:"documentLink,omitempty"`
-	ColorProvider      DocumentColorClientCapabilities           `json:"colorProvider,omitempty"`
-	Formatting         DocumentFormattingClientCapabilities      `json:"formatting,omitempty"`
-	RangeFormatting    DocumentRangeFormattingClientCapabilities `json:"rangeFormatting,omitempty"`
-	OnTypeFormatting   DocumentOnTypeFormattingClientCapabilites `json:"onTypeFormatting,omitempty"`
-	Rename             RenameClientCapabilities                  `json:"rename,omitempty"`
-	PublishDiagnostics PublishDiagnosticsClientCapabilities      `json:"publishDiagnostics,omitempty"`
-	FoldingRange       FoldingRangeClientCapabilites             `json:"foldingRange,omitempty"`
-	SelectionRange     SelectionRangeClientCapabilities          `json:"selectionRange,omitempty"`
-}
-
 type WorkspaceEditClientCapabilities struct {
 	DocumentChanges    bool                    `json:"documentChanges,omitempty"`
 	ResourceOperations []ResourceOperationKind `json:"resourceOperations,omitempty"`
 	FailureHandling    FailureHandlingKind     `json:"failureHandling,omitempty"`
+}
+
+type TextDocumentClientCapabilities struct {
+	Synchronization    *TextDocumentSyncClientCapabilities        `json:"synchronization,omitempty"`
+	Completion         *CompletionClientCapabilities              `json:"completion,omitempty"`
+	Hover              *HoverClientCapabilities                   `json:"hover,omitempty"`
+	SignatureHelp      *SignatureHelpClientCapabilities           `json:"signatureHelp,omitempty"`
+	Declaration        *DeclarationClientCapabilities             `json:"declaration,omitempty"`
+	Definition         *DefinitionClientCapabilities              `json:"definition,omitempty"`
+	TypeDefinition     *TypeDefinitionClientCapabilities          `json:"typeDefinition,omitempty"`
+	Implementation     *ImplementationClientCapabilities          `json:"implementation,omitempty"`
+	References         *ReferenceClientCapabilities               `json:"references,omitempty"`
+	DocumentHighlight  *DocumentHighlightClientCapabilities       `json:"documentHighlight,omitempty"`
+	DocumentSymbol     *DocumentSymbolClientCapabilities          `json:"documentSymbol,omitempty"`
+	CodeAction         *CodeActionClientCapabilities              `json:"codeAction,omitempty"`
+	CodeLens           *CodeLensClientCapabilities                `json:"codeLens,omitempty"`
+	DocumentLink       *DocumentLinkClientCapabilities            `json:"documentLink,omitempty"`
+	ColorProvider      *DocumentColorClientCapabilities           `json:"colorProvider,omitempty"`
+	Formatting         *DocumentFormattingClientCapabilities      `json:"formatting,omitempty"`
+	RangeFormatting    *DocumentRangeFormattingClientCapabilities `json:"rangeFormatting,omitempty"`
+	OnTypeFormatting   *DocumentOnTypeFormattingClientCapabilites `json:"onTypeFormatting,omitempty"`
+	Rename             *RenameClientCapabilities                  `json:"rename,omitempty"`
+	PublishDiagnostics *PublishDiagnosticsClientCapabilities      `json:"publishDiagnostics,omitempty"`
+	FoldingRange       *FoldingRangeClientCapabilites             `json:"foldingRange,omitempty"`
+	SelectionRange     *SelectionRangeClientCapabilities          `json:"selectionRange,omitempty"`
+}
+
+type WorkspaceClientCapabilities struct {
+	ApplyEdit              bool                                      `json:"applyEdit,omitempty"`
+	WorkspaceEdit          *WorkspaceEditClientCapabilities          `json:"workspaceEdit,omitempty"`
+	DidChangeConfiguration *DidChangeConfigurationClientCapabilities `json:"didChangeConfiguration,omitempty"`
+	DidChangeWatchedFiles  *DidChangeWatchedFilesClientCapabilities  `json:"didChangeWatchedFiles,omitempty"`
+	Symbol                 *WorkspaceSymbolClientCapabilities        `json:"symbol,omitempty"`
+	ExecuteCommand         *ExecuteCommandClientCapabilities         `json:"executeCommand,omitempty"`
+	WorkspaceFolders       bool                                      `json:"workspaceFolders,omitempty"`
+	Configuration          bool                                      `json:"configuration,omitempty"`
+}
+
+type WindowClientCapabilities struct {
+	WorkDoneProgress bool `json:"workDoneProgress,omitempty"`
+}
+
+type ClientCapabilities struct {
+	Workspace    *WorkspaceClientCapabilities    `json:"workspace,omitempty"`
+	TextDocument *TextDocumentClientCapabilities `json:"textDocument,omitempty"`
+	Window       *WindowClientCapabilities       `json:"window,omitempty"`
+	Experimental interface{}                     `json:"experimental,omitempty"`
 }
 
 type DidChangeConfigurationClientCapabilities struct {
@@ -61,7 +63,7 @@ type DidChangeWatchedFilesClientCapabilities struct {
 
 type WorkspaceSymbolClientCapabilities struct {
 	DynamicRegistration bool `json:"dynamicRegistration,omitempty"`
-	SymbolKind          struct {
+	SymbolKind          *struct {
 		ValueSet []SymbolKind `json:"valueSet,omitempty"`
 	} `json:"symbolKind,omitempty"`
 }
@@ -79,17 +81,17 @@ type TextDocumentSyncClientCapabilities struct {
 
 type CompletionClientCapabilities struct {
 	DynamicRegistration bool `json:"dynamicRegistration,omitempty"`
-	CompletionItem      struct {
+	CompletionItem      *struct {
 		SnippetSupport          bool         `json:"snippetSupport,omitempty"`
 		CommitCharactersSupport bool         `json:"commitCharactersSupport,omitempty"`
 		DocumentationFormat     []MarkupKind `json:"documentationFormat,omitempty"`
 		DeprecatedSupport       bool         `json:"deprecatedSupport,omitempty"`
 		PreselectSupport        bool         `json:"preselectSupport,omitempty"`
-		TagSupport              struct {
+		TagSupport              *struct {
 			ValueSet []CompletionItemTag `json:"valueSet,omitempty"`
 		} `json:"tagSupport,omitempty"`
 	} `json:"completionItem,omitempty"`
-	CompletionItemKind struct {
+	CompletionItemKind *struct {
 		ValueSet []CompletionItemKind `json:"valueSet,omitempty"`
 	} `json:"completionItemKind,omitempty"`
 	ContextSupport bool `json:"contextSupport,omitempty"`
@@ -102,9 +104,9 @@ type HoverClientCapabilities struct {
 
 type SignatureHelpClientCapabilities struct {
 	DynamicRegistration  bool `json:"dynamicRegistration,omitempty"`
-	SignatureInformation struct {
+	SignatureInformation *struct {
 		DocumentationFormat  []MarkupKind `json:"documentationFormat,omitempty"`
-		ParameterInformation struct {
+		ParameterInformation *struct {
 			LabelOffsetSupport bool `json:"labelOffsetSupport,omitempty"`
 		} `json:"parameterInformation,omitempty"`
 	} `json:"signatureInformation,omitempty"`
@@ -136,7 +138,7 @@ type DocumentHighlightClientCapabilities struct {
 
 type DocumentSymbolClientCapabilities struct {
 	DynamicRegistration bool `json:"dynamicRegistration,omitempty"`
-	SymbolKind          struct {
+	SymbolKind          *struct {
 		ValueSet []SymbolKind `json:"valueSet,omitempty"`
 	} `json:"symbolKind,omitempty"`
 	HierarchicalDocumentSymbolSupport bool `json:"hierarchicalDocumentSymbolSupport,omitempty"`
@@ -149,8 +151,8 @@ type ImplementationClientCapabilities struct {
 
 type CodeActionClientCapabilities struct {
 	DynamicRegistration      bool `json:"dynamicRegistration,omitempty"`
-	CodeActionLiteralSupport struct {
-		CodeActionKind struct {
+	CodeActionLiteralSupport *struct {
+		CodeActionKind *struct {
 			ValueSet []CodeActionKind `json:"valueSet,omitempty"`
 		} `json:"codeActionKind,omitempty"`
 	} `json:"codeActionLiteralSupport,omitempty"`
@@ -189,7 +191,7 @@ type RenameClientCapabilities struct {
 
 type PublishDiagnosticsClientCapabilities struct {
 	RelatedInformation bool `json:"relatedInformation,omitempty"`
-	TagSupport         struct {
+	TagSupport         *struct {
 		ValueSet []DiagnosticTag `json:"valueSet,omitempty"`
 	} `json:"tagSupport,omitempty"`
 	VersionSupport bool `json:"versionSupport,omitempty"`
@@ -257,159 +259,159 @@ type StaticRegistrationOptions struct {
 }
 
 type CompletionOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 	TriggerCharacters       []string `json:"triggerCharacters,omitempty"`
 	AllCommitCharacters     []string `json:"allCommitCharacters,omitempty"`
 	ResolveProvider         bool     `json:"resolveProvider,omitempty"`
 }
 
 type CompletionRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	CompletionOptions               `json:"completionOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	CompletionOptions               `json:",inline"`
 }
 
 type HoverOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 }
 
 type HoverRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	HoverOptions                    `json:"hoverOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	HoverOptions                    `json:",inline"`
 }
 
 type SignatureHelpOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 	TriggerCharacters       []string `json:"triggerCharacters,omitempty"`
 	RetriggerCharacters     []string `json:"retriggerCharacters,omitempty"`
 }
 
 type SignatureHelpRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	SignatureHelpOptions            `json:"signatureHelpOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	SignatureHelpOptions            `json:",inline"`
 }
 
 type DeclarationOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 }
 
 type DeclarationRegistrationOptions struct {
-	DeclarationOptions              `json:"declarationOptions,omitempty"`
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	StaticRegistrationOptions       `json:"staticRegistrationOptions,omitempty"`
+	DeclarationOptions              `json:",inline"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	StaticRegistrationOptions       `json:",inline"`
 }
 
 type DefinitionOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 }
 
 type DefinitionRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	DefinitionOptions               `json:"definitionOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	DefinitionOptions               `json:",inline"`
 }
 
 type TypeDefinitionOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 }
 
 type TypeDefinitionRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	TypeDefinitionOptions           `json:"typeDefinitionOptions,omitempty"`
-	StaticRegistrationOptions       `json:"staticRegistrationOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	TypeDefinitionOptions           `json:",inline"`
+	StaticRegistrationOptions       `json:",inline"`
 }
 
 type ImplementationOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 }
 
 type ImplementationRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	ImplementationOptions           `json:"implementationOptions,omitempty"`
-	StaticRegistrationOptions       `json:"staticRegistrationOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	ImplementationOptions           `json:",inline"`
+	StaticRegistrationOptions       `json:",inline"`
 }
 
 type ReferenceOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 }
 
 type ReferenceRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	ReferenceOptions                `json:"referenceOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	ReferenceOptions                `json:",inline"`
 }
 
 type DocumentHighlightOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 }
 
 type DocumentHighlightRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	DocumentHighlightOptions        `json:"documentHighlightOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	DocumentHighlightOptions        `json:",inline"`
 }
 
 type DocumentSymbolOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 }
 
 type DocumentSymbolRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	DocumentSymbolOptions           `json:"documentSymbolOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	DocumentSymbolOptions           `json:",inline"`
 }
 
 type CodeActionOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 	CodeActionKinds         []CodeActionKind `json:"codeActionKinds,omitempty"`
 }
 
 type CodeActionRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	CodeActionOptions               `json:"codeActionOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	CodeActionOptions               `json:",inline"`
 }
 
 type CodeLensOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 	ResolveProvider         bool `json:"resolveProvider,omitempty"`
 }
 
 type CodeLensRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	CodeLensOptions                 `json:"codeLensOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	CodeLensOptions                 `json:",inline"`
 }
 
 type DocumentLinkOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 	ResolveProvider         bool `json:"resolveProvider,omitempty"`
 }
 
 type DocumentLinkRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	DocumentLinkOptions             `json:"documentLinkOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	DocumentLinkOptions             `json:",inline"`
 }
 
 type DocumentColorOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 }
 
 type DocumentColorRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	StaticRegistrationOptions       `json:"staticRegistrationOptions,omitempty"`
-	DocumentColorOptions            `json:"documentColorOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	StaticRegistrationOptions       `json:",inline"`
+	DocumentColorOptions            `json:",inline"`
 }
 
 type DocumentFormattingOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 }
 
 type DocumentFormattingRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	DocumentFormattingOptions       `json:"documentFormattingOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	DocumentFormattingOptions       `json:",inline"`
 }
 
 type DocumentRangeFormattingOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 }
 
 type DocumentRangeFormattingRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	DocumentRangeFormattingOptions  `json:"documentRangeFormattingOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	DocumentRangeFormattingOptions  `json:",inline"`
 }
 
 type DocumentOnTypeFormattingOptions struct {
@@ -418,37 +420,37 @@ type DocumentOnTypeFormattingOptions struct {
 }
 
 type DocumentOnTypeFormattingRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	DocumentOnTypeFormattingOptions `json:"documentOnTypeFormattingOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	DocumentOnTypeFormattingOptions `json:",inline"`
 }
 
 type RenameOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 	PrepareProvider         bool `json:"prepareProvider,omitempty"`
 }
 
 type RenameRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	RenameOptions                   `json:"renameOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	RenameOptions                   `json:",inline"`
 }
 
 type FoldingRangeOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 }
 
 type FoldingRangeRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:"textDocumentRegistrationOptions,omitempty"`
-	FoldingRangeOptions             `json:"foldingRangeOptions,omitempty"`
-	StaticRegistrationOptions       `json:"staticRegistrationOptions,omitempty"`
+	TextDocumentRegistrationOptions `json:",inline"`
+	FoldingRangeOptions             `json:",inline"`
+	StaticRegistrationOptions       `json:",inline"`
 }
 
 type ExecuteCommandOptions struct {
-	WorkDoneProgressOptions `json:"workDoneProgressOptions,omitempty"`
+	WorkDoneProgressOptions `json:",inline"`
 	Commands                []string `json:"commands,omitempty"`
 }
 
 type ExecuteCommandRegistrationOptions struct {
-	ExecuteCommandOptions `json:"executeCommandOptions,omitempty"`
+	ExecuteCommandOptions `json:",inline"`
 }
 
 type DidChangeWatchedFilesRegistrationOptions struct {
