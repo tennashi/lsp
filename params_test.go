@@ -9,11 +9,10 @@ import (
 	"github.com/tennashi/lsp"
 )
 
-var cmpOpt = cmp.AllowUnexported(lsp.ProgressToken{})
+var testStrToken = lsp.NewStringToken("token")
+var testIntToken = lsp.NewIntToken(123)
 
 func TestWorkDoneProgressParams_MarshalUnmarshal(t *testing.T) {
-	testStrToken := lsp.NewStringProgressToken("token")
-	testIntToken := lsp.NewIntProgressToken(123)
 
 	cases := []struct {
 		goStruct lsp.WorkDoneProgressParams
@@ -61,9 +60,6 @@ func TestWorkDoneProgressParams_MarshalUnmarshal(t *testing.T) {
 }
 
 func TestPartialResultParams_MarshalUnmarshal(t *testing.T) {
-	testStrToken := lsp.NewStringProgressToken("token")
-	testIntToken := lsp.NewIntProgressToken(123)
-
 	cases := []struct {
 		goStruct lsp.PartialResultParams
 		json     string
@@ -238,42 +234,42 @@ func TestProgressParams_MarshalUnmarshal(t *testing.T) {
 	}{
 		{
 			goStruct: lsp.ProgressParams{
-				Token: lsp.NewStringProgressToken("token"),
+				Token: lsp.NewStringToken("token"),
 				Value: float64(90),
 			},
 			json: `{"token":"token","value":90}`,
 		},
 		{
 			goStruct: lsp.ProgressParams{
-				Token: lsp.NewIntProgressToken(123),
+				Token: lsp.NewIntToken(123),
 				Value: float64(90),
 			},
 			json: `{"token":123,"value":90}`,
 		},
 		{
 			goStruct: lsp.ProgressParams{
-				Token: lsp.NewStringProgressToken("token"),
+				Token: lsp.NewStringToken("token"),
 				Value: "90%",
 			},
 			json: `{"token":"token","value":"90%"}`,
 		},
 		{
 			goStruct: lsp.ProgressParams{
-				Token: lsp.NewStringProgressToken("token"),
+				Token: lsp.NewStringToken("token"),
 				Value: float64(0.9),
 			},
 			json: `{"token":"token","value":0.9}`,
 		},
 		{
 			goStruct: lsp.ProgressParams{
-				Token: lsp.NewStringProgressToken("token"),
+				Token: lsp.NewStringToken("token"),
 				Value: true,
 			},
 			json: `{"token":"token","value":true}`,
 		},
 		{
 			goStruct: lsp.ProgressParams{
-				Token: lsp.NewStringProgressToken("token"),
+				Token: lsp.NewStringToken("token"),
 			},
 			json: `{"token":"token","value":null}`,
 		},

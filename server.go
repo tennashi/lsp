@@ -642,7 +642,7 @@ func (s *Server) initialize(ctx context.Context, conn *Conn, req *jsonrpc2.Reque
 
 func (s *Server) defaultOnInitialize(context.Context, *Conn, InitializeParams) (InitializeResult, error) {
 	return InitializeResult{
-		ServerInfo:   s.Info,
+		ServerInfo:   &s.Info,
 		Capabilities: s.Capabilities,
 	}, nil
 }

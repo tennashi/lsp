@@ -206,30 +206,30 @@ type SelectionRangeClientCapabilities struct {
 }
 
 type ServerCapabilities struct {
-	TextDocumentSync                 TextDocumentSyncOptions           `json:"textDocumentSync,omitempty"`
-	CompletionProvider               CompletionOptions                 `json:"completionProvider,omitempty"`
-	HoverProvider                    HoverOptions                      `json:"hoverProvider,omitempty"`
-	SignatureHelpProvider            SignatureHelpOptions              `json:"signatureHelpProvider,omitempty"`
-	DeclarationProvider              DeclarationRegistrationOptions    `json:"declarationProvider,omitempty"`
-	DefinitionProvider               DefinitionOptions                 `json:"definitionProvider,omitempty"`
-	TypeDefinitionProvider           TypeDefinitionRegistrationOptions `json:"typeDefinitionProvider,omitempty"`
-	ImplementationProvider           ImplementationRegistrationOptions `json:"implementationProvider,omitempty"`
-	ReferencesProvider               ReferenceOptions                  `json:"referencesProvider,omitempty"`
-	DocumentHighlightProvider        DocumentHighlightOptions          `json:"documentHighlightProvider,omitempty"`
-	DocumentSymbolProvider           DocumentSymbolOptions             `json:"documentSymbolProvider,omitempty"`
-	CodeActionProvider               CodeActionOptions                 `json:"codeActionProvider,omitempty"`
-	CodeLensProvider                 CodeLensOptions                   `json:"codeLensProvider,omitempty"`
-	DocumentLinkProvider             DocumentLinkOptions               `json:"documentLinkProvider,omitempty"`
-	ColorProvider                    DocumentColorRegistrationOptions  `json:"colorProvider,omitempty"`
-	DocumentFormattingProvider       DocumentFormattingOptions         `json:"documentFormattingProvider,omitempty"`
-	DocumentRangeFormattingProvider  DocumentRangeFormattingOptions    `json:"documentRangeFormattingProvider,omitempty"`
-	DocumentOnTypeFormattingProvider DocumentOnTypeFormattingOptions   `json:"documentOnTypeFormattingProvider,omitempty"`
-	RenameProvider                   RenameOptions                     `json:"renameProvider,omitempty"`
-	FoldingRangeProvider             FoldingRangeRegistrationOptions   `json:"foldingRangeProvider,omitempty"`
-	ExecuteCommandProvider           ExecuteCommandOptions             `json:"executeCommandProvider,omitempty"`
-	WorkspaceSymbolProvder           bool                              `json:"workspaceSymbolProvder,omitempty"`
-	Workspace                        struct {
-		WorkspaceFolders WorkspaceFoldersServerCapabilities `json:"workspaceFolders,omitempty"`
+	TextDocumentSync                 *TextDocumentSyncOptions           `json:"textDocumentSync,omitempty"`
+	CompletionProvider               *CompletionOptions                 `json:"completionProvider,omitempty"`
+	HoverProvider                    *HoverOptions                      `json:"hoverProvider,omitempty"`
+	SignatureHelpProvider            *SignatureHelpOptions              `json:"signatureHelpProvider,omitempty"`
+	DeclarationProvider              *DeclarationRegistrationOptions    `json:"declarationProvider,omitempty"`
+	DefinitionProvider               *DefinitionOptions                 `json:"definitionProvider,omitempty"`
+	TypeDefinitionProvider           *TypeDefinitionRegistrationOptions `json:"typeDefinitionProvider,omitempty"`
+	ImplementationProvider           *ImplementationRegistrationOptions `json:"implementationProvider,omitempty"`
+	ReferencesProvider               *ReferenceOptions                  `json:"referencesProvider,omitempty"`
+	DocumentHighlightProvider        *DocumentHighlightOptions          `json:"documentHighlightProvider,omitempty"`
+	DocumentSymbolProvider           *DocumentSymbolOptions             `json:"documentSymbolProvider,omitempty"`
+	CodeActionProvider               *CodeActionOptions                 `json:"codeActionProvider,omitempty"`
+	CodeLensProvider                 *CodeLensOptions                   `json:"codeLensProvider,omitempty"`
+	DocumentLinkProvider             *DocumentLinkOptions               `json:"documentLinkProvider,omitempty"`
+	ColorProvider                    *DocumentColorRegistrationOptions  `json:"colorProvider,omitempty"`
+	DocumentFormattingProvider       *DocumentFormattingOptions         `json:"documentFormattingProvider,omitempty"`
+	DocumentRangeFormattingProvider  *DocumentRangeFormattingOptions    `json:"documentRangeFormattingProvider,omitempty"`
+	DocumentOnTypeFormattingProvider *DocumentOnTypeFormattingOptions   `json:"documentOnTypeFormattingProvider,omitempty"`
+	RenameProvider                   *RenameOptions                     `json:"renameProvider,omitempty"`
+	FoldingRangeProvider             *FoldingRangeRegistrationOptions   `json:"foldingRangeProvider,omitempty"`
+	ExecuteCommandProvider           *ExecuteCommandOptions             `json:"executeCommandProvider,omitempty"`
+	WorkspaceSymbolProvder           bool                               `json:"workspaceSymbolProvder,omitempty"`
+	Workspace                        *struct {
+		WorkspaceFolders *WorkspaceFoldersServerCapabilities `json:"workspaceFolders,omitempty"`
 	} `json:"workspace,omitempty"`
 	Experimental interface{} `json:"experimental,omitempty"`
 }
