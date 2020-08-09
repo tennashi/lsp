@@ -165,6 +165,10 @@ func (s *Server) Serve(ctx context.Context) error {
 }
 
 func (s *Server) registerRequest(ctx context.Context, req *jsonrpc2.Request) (context.Context, func()) {
+	if s.cancelFns == nil {
+		s.cancelFns = &sync.Map{}
+	}
+
 	ctx, cancel := context.WithCancel(ctx)
 	s.cancelFns.Store(req.ID, cancel)
 

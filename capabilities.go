@@ -259,159 +259,159 @@ type StaticRegistrationOptions struct {
 }
 
 type CompletionOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
-	TriggerCharacters       []string `json:"triggerCharacters,omitempty"`
-	AllCommitCharacters     []string `json:"allCommitCharacters,omitempty"`
-	ResolveProvider         bool     `json:"resolveProvider,omitempty"`
+	WorkDoneProgressOptions
+	TriggerCharacters   []string `json:"triggerCharacters,omitempty"`
+	AllCommitCharacters []string `json:"allCommitCharacters,omitempty"`
+	ResolveProvider     bool     `json:"resolveProvider,omitempty"`
 }
 
 type CompletionRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	CompletionOptions               `json:",inline"`
+	TextDocumentRegistrationOptions
+	CompletionOptions
 }
 
 type HoverOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
+	WorkDoneProgressOptions
 }
 
 type HoverRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	HoverOptions                    `json:",inline"`
+	TextDocumentRegistrationOptions
+	HoverOptions
 }
 
 type SignatureHelpOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
-	TriggerCharacters       []string `json:"triggerCharacters,omitempty"`
-	RetriggerCharacters     []string `json:"retriggerCharacters,omitempty"`
+	WorkDoneProgressOptions
+	TriggerCharacters   []string `json:"triggerCharacters,omitempty"`
+	RetriggerCharacters []string `json:"retriggerCharacters,omitempty"`
 }
 
 type SignatureHelpRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	SignatureHelpOptions            `json:",inline"`
+	TextDocumentRegistrationOptions
+	SignatureHelpOptions
 }
 
 type DeclarationOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
+	WorkDoneProgressOptions
 }
 
 type DeclarationRegistrationOptions struct {
-	DeclarationOptions              `json:",inline"`
-	TextDocumentRegistrationOptions `json:",inline"`
-	StaticRegistrationOptions       `json:",inline"`
+	DeclarationOptions
+	TextDocumentRegistrationOptions
+	StaticRegistrationOptions
 }
 
 type DefinitionOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
+	WorkDoneProgressOptions
 }
 
 type DefinitionRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	DefinitionOptions               `json:",inline"`
+	TextDocumentRegistrationOptions
+	DefinitionOptions
 }
 
 type TypeDefinitionOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
+	WorkDoneProgressOptions
 }
 
 type TypeDefinitionRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	TypeDefinitionOptions           `json:",inline"`
-	StaticRegistrationOptions       `json:",inline"`
+	TextDocumentRegistrationOptions
+	TypeDefinitionOptions
+	StaticRegistrationOptions
 }
 
 type ImplementationOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
+	WorkDoneProgressOptions
 }
 
 type ImplementationRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	ImplementationOptions           `json:",inline"`
-	StaticRegistrationOptions       `json:",inline"`
+	TextDocumentRegistrationOptions
+	ImplementationOptions
+	StaticRegistrationOptions
 }
 
 type ReferenceOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
+	WorkDoneProgressOptions
 }
 
 type ReferenceRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	ReferenceOptions                `json:",inline"`
+	TextDocumentRegistrationOptions
+	ReferenceOptions
 }
 
 type DocumentHighlightOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
+	WorkDoneProgressOptions
 }
 
 type DocumentHighlightRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	DocumentHighlightOptions        `json:",inline"`
+	TextDocumentRegistrationOptions
+	DocumentHighlightOptions
 }
 
 type DocumentSymbolOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
+	WorkDoneProgressOptions
 }
 
 type DocumentSymbolRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	DocumentSymbolOptions           `json:",inline"`
+	TextDocumentRegistrationOptions
+	DocumentSymbolOptions
 }
 
 type CodeActionOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
-	CodeActionKinds         []CodeActionKind `json:"codeActionKinds,omitempty"`
+	WorkDoneProgressOptions
+	CodeActionKinds []CodeActionKind `json:"codeActionKinds,omitempty"`
 }
 
 type CodeActionRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	CodeActionOptions               `json:",inline"`
+	TextDocumentRegistrationOptions
+	CodeActionOptions
 }
 
 type CodeLensOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
-	ResolveProvider         bool `json:"resolveProvider,omitempty"`
+	WorkDoneProgressOptions
+	ResolveProvider bool `json:"resolveProvider,omitempty"`
 }
 
 type CodeLensRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	CodeLensOptions                 `json:",inline"`
+	TextDocumentRegistrationOptions
+	CodeLensOptions
 }
 
 type DocumentLinkOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
-	ResolveProvider         bool `json:"resolveProvider,omitempty"`
+	WorkDoneProgressOptions
+	ResolveProvider bool `json:"resolveProvider,omitempty"`
 }
 
 type DocumentLinkRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	DocumentLinkOptions             `json:",inline"`
+	TextDocumentRegistrationOptions
+	DocumentLinkOptions
 }
 
 type DocumentColorOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
+	WorkDoneProgressOptions
 }
 
 type DocumentColorRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	StaticRegistrationOptions       `json:",inline"`
-	DocumentColorOptions            `json:",inline"`
+	TextDocumentRegistrationOptions
+	StaticRegistrationOptions
+	DocumentColorOptions
 }
 
 type DocumentFormattingOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
+	WorkDoneProgressOptions
 }
 
 type DocumentFormattingRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	DocumentFormattingOptions       `json:",inline"`
+	TextDocumentRegistrationOptions
+	DocumentFormattingOptions
 }
 
 type DocumentRangeFormattingOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
+	WorkDoneProgressOptions
 }
 
 type DocumentRangeFormattingRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	DocumentRangeFormattingOptions  `json:",inline"`
+	TextDocumentRegistrationOptions
+	DocumentRangeFormattingOptions
 }
 
 type DocumentOnTypeFormattingOptions struct {
@@ -420,37 +420,37 @@ type DocumentOnTypeFormattingOptions struct {
 }
 
 type DocumentOnTypeFormattingRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	DocumentOnTypeFormattingOptions `json:",inline"`
+	TextDocumentRegistrationOptions
+	DocumentOnTypeFormattingOptions
 }
 
 type RenameOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
-	PrepareProvider         bool `json:"prepareProvider,omitempty"`
+	WorkDoneProgressOptions
+	PrepareProvider bool `json:"prepareProvider,omitempty"`
 }
 
 type RenameRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	RenameOptions                   `json:",inline"`
+	TextDocumentRegistrationOptions
+	RenameOptions
 }
 
 type FoldingRangeOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
+	WorkDoneProgressOptions
 }
 
 type FoldingRangeRegistrationOptions struct {
-	TextDocumentRegistrationOptions `json:",inline"`
-	FoldingRangeOptions             `json:",inline"`
-	StaticRegistrationOptions       `json:",inline"`
+	TextDocumentRegistrationOptions
+	FoldingRangeOptions
+	StaticRegistrationOptions
 }
 
 type ExecuteCommandOptions struct {
-	WorkDoneProgressOptions `json:",inline"`
-	Commands                []string `json:"commands,omitempty"`
+	WorkDoneProgressOptions
+	Commands []string `json:"commands,omitempty"`
 }
 
 type ExecuteCommandRegistrationOptions struct {
-	ExecuteCommandOptions `json:",inline"`
+	ExecuteCommandOptions
 }
 
 type DidChangeWatchedFilesRegistrationOptions struct {

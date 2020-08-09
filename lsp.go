@@ -449,8 +449,8 @@ type TextDocumentItem struct {
 }
 
 type VersionedTextDocumentIdentifier struct {
-	TextDocumentIdentifier `json:",inline"`
-	Version                *int `json:"version"`
+	TextDocumentIdentifier
+	Version *int `json:"version"`
 }
 
 type DocumentFilter struct {

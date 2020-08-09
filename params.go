@@ -71,145 +71,145 @@ type InitializeParams struct {
 }
 
 type WorkspaceSymbolParams struct {
-	WorkDoneProgressParams `json:",inline"`
-	PartialResultParams    `json:",inline"`
-	Query                  string `json:"query"`
+	WorkDoneProgressParams
+	PartialResultParams
+	Query string `json:"query"`
 }
 
 type ExecuteCommandParams struct {
-	WorkDoneProgressParams `json:",inline"`
-	Command                string        `json:"command"`
-	Arguments              []interface{} `json:"arguments,omitempty"`
+	WorkDoneProgressParams
+	Command   string        `json:"command"`
+	Arguments []interface{} `json:"arguments,omitempty"`
 }
 
 type CompletionParams struct {
-	TextDocumentPositionParams `json:",inline"`
-	WorkDoneProgressParams     `json:",inline"`
-	PartialResultParams        `json:",inline"`
-	Context                    *CompletionContext `json:"context,omitempty"`
+	TextDocumentPositionParams
+	WorkDoneProgressParams
+	PartialResultParams
+	Context *CompletionContext `json:"context,omitempty"`
 }
 
 type HoverParams struct {
-	TextDocumentPositionParams `json:",inline"`
-	WorkDoneProgressParams     `json:",inline"`
+	TextDocumentPositionParams
+	WorkDoneProgressParams
 }
 
 type SignatureHelpParams struct {
-	TextDocumentPositionParams `json:",inline"`
-	WorkDoneProgressParams     `json:",inline"`
-	Context                    *SignatureHelpContext `json:"context,omitempty"`
+	TextDocumentPositionParams
+	WorkDoneProgressParams
+	Context *SignatureHelpContext `json:"context,omitempty"`
 }
 
 type DeclarationParams struct {
-	TextDocumentPositionParams `json:",inline"`
-	WorkDoneProgressParams     `json:",inline"`
-	PartialResultParams        `json:",inline"`
+	TextDocumentPositionParams
+	WorkDoneProgressParams
+	PartialResultParams
 }
 
 type DefinitionParams struct {
-	TextDocumentPositionParams `json:",inline"`
-	WorkDoneProgressParams     `json:",inline"`
-	PartialResultParams        `json:",inline"`
+	TextDocumentPositionParams
+	WorkDoneProgressParams
+	PartialResultParams
 }
 
 type TypeDefinitionParams struct {
-	TextDocumentPositionParams `json:",inline"`
-	WorkDoneProgressParams     `json:",inline"`
-	PartialResultParams        `json:",inline"`
+	TextDocumentPositionParams
+	WorkDoneProgressParams
+	PartialResultParams
 }
 
 type ImplementationParams struct {
-	TextDocumentPositionParams `json:",inline"`
-	WorkDoneProgressParams     `json:",inline"`
-	PartialResultParams        `json:",inline"`
+	TextDocumentPositionParams
+	WorkDoneProgressParams
+	PartialResultParams
 }
 
 type ReferenceParams struct {
-	TextDocumentPositionParams `json:",inline"`
-	WorkDoneProgressParams     `json:",inline"`
-	PartialResultParams        `json:",inline"`
-	Context                    ReferenceContext `json:"context"`
+	TextDocumentPositionParams
+	WorkDoneProgressParams
+	PartialResultParams
+	Context ReferenceContext `json:"context"`
 }
 type DocumentHighlightParams struct {
-	TextDocumentPositionParams `json:",inline"`
-	WorkDoneProgressParams     `json:",inline"`
-	PartialResultParams        `json:",inline"`
+	TextDocumentPositionParams
+	WorkDoneProgressParams
+	PartialResultParams
 }
 
 type DocumentSymbolParams struct {
-	WorkDoneProgressParams `json:",inline"`
-	PartialResultParams    `json:",inline"`
-	TextDocument           TextDocumentIdentifier `json:"textDocument"`
+	WorkDoneProgressParams
+	PartialResultParams
+	TextDocument TextDocumentIdentifier `json:"textDocument"`
 }
 
 type CodeActionParams struct {
-	WorkDoneProgressParams `json:",inline"`
-	PartialResultParams    `json:",inline"`
-	TextDocument           TextDocumentIdentifier `json:"textDocument"`
-	Range                  Range                  `json:"range"`
-	Context                CodeActionContext      `json:"context"`
+	WorkDoneProgressParams
+	PartialResultParams
+	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	Range        Range                  `json:"range"`
+	Context      CodeActionContext      `json:"context"`
 }
 
 type CodeLensParams struct {
-	WorkDoneProgressParams `json:",inline"`
-	PartialResultParams    `json:",inline"`
-	TextDocument           TextDocumentIdentifier `json:"textDocument"`
+	WorkDoneProgressParams
+	PartialResultParams
+	TextDocument TextDocumentIdentifier `json:"textDocument"`
 }
 
 type DocumentLinkParams struct {
-	WorkDoneProgressParams `json:",inline"`
-	PartialResultParams    `json:",inline"`
-	TextDocument           TextDocumentIdentifier `json:"textDocument"`
+	WorkDoneProgressParams
+	PartialResultParams
+	TextDocument TextDocumentIdentifier `json:"textDocument"`
 }
 
 type DocumentColorParams struct {
-	WorkDoneProgressParams `json:",inline"`
-	PartialResultParams    `json:",inline"`
-	TextDocument           TextDocumentIdentifier `json:"textDocument"`
+	WorkDoneProgressParams
+	PartialResultParams
+	TextDocument TextDocumentIdentifier `json:"textDocument"`
 }
 
 type ColorPresentationParams struct {
-	WorkDoneProgressParams `json:",inline"`
-	PartialResultParams    `json:",inline"`
-	TextDocument           TextDocumentIdentifier `json:"textDocument"`
-	Color                  Color                  `json:"color"`
-	Range                  Range                  `json:"range"`
+	WorkDoneProgressParams
+	PartialResultParams
+	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	Color        Color                  `json:"color"`
+	Range        Range                  `json:"range"`
 }
 
 type DocumentFormattingParams struct {
-	WorkDoneProgressParams `json:",inline"`
-	TextDocument           TextDocumentIdentifier `json:"textDocument"`
-	Options                FormattingOptions      `json:"options"`
+	WorkDoneProgressParams
+	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	Options      FormattingOptions      `json:"options"`
 }
 
 type DocumentRangeFormattingParams struct {
-	WorkDoneProgressParams `json:",inline"`
-	TextDocument           TextDocumentIdentifier `json:"textDocument"`
-	Range                  Range                  `json:"range"`
-	Options                FormattingOptions      `json:"options"`
+	WorkDoneProgressParams
+	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	Range        Range                  `json:"range"`
+	Options      FormattingOptions      `json:"options"`
 }
 
 type DocumentOnTypeFormattingParams struct {
-	TextDocumentPositionParams `json:",inline"`
-	Ch                         string            `json:"ch"`
-	Options                    FormattingOptions `json:"options"`
+	TextDocumentPositionParams
+	Ch      string            `json:"ch"`
+	Options FormattingOptions `json:"options"`
 }
 
 type RenameParams struct {
-	TextDocumentPositionParams `json:",inline"`
-	WorkDoneProgressParams     `json:",inline"`
-	NewName                    string `json:"newName"`
+	TextDocumentPositionParams
+	WorkDoneProgressParams
+	NewName string `json:"newName"`
 }
 
 type FoldingRangeParams struct {
-	WorkDoneProgressParams `json:",inline"`
-	PartialResultParams    `json:",inline"`
-	TextDocument           TextDocumentIdentifier `json:"textDocument"`
+	WorkDoneProgressParams
+	PartialResultParams
+	TextDocument TextDocumentIdentifier `json:"textDocument"`
 }
 
 type SelectionRangeParams struct {
-	WorkDoneProgressParams `json:",inline"`
-	PartialResultParams    `json:",inline"`
-	TextDocument           TextDocumentIdentifier `json:"textDocument"`
-	Positions              []Position             `json:"positions"`
+	WorkDoneProgressParams
+	PartialResultParams
+	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	Positions    []Position             `json:"positions"`
 }
